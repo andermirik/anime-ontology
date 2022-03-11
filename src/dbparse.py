@@ -28,7 +28,7 @@ iter_proxy = iter(proxies)
 def get_proxies():
     global proxies
     global iter_proxy
-    with open("proxy_exports5.txt", 'r', encoding='utf-8') as proxy_file:
+    with open("src/proxy_exports5.txt", 'r', encoding='utf-8') as proxy_file:
         string = proxy_file.readlines()
         for sub in string:
             s = sub.split()[0]
@@ -118,7 +118,7 @@ def get_shiki_url(anime_name): #return first searched anime by name
 
 def main():
     db = get_database()
-    with open('../jsons/raw/characters.json', 'r+', encoding='utf-8') as file:
+    with open('jsons/raw/characters.json', 'r+', encoding='utf-8') as file:
         data = json.load(file)
         print(len(data))
         file.close()

@@ -92,7 +92,7 @@ def save_to_json(json_name):
     bar.finish()
 def main():
     #change_in_db()
-    save_to_json('../jsons/processed/data_json.json')
+    save_to_json('jsons/processed/data_json.json')
 
 if __name__ == '__main__':
     main()
