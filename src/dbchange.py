@@ -44,15 +44,15 @@ def json_replace(json):
     try:
         temp = {}
         temp2 = {}
-        new_anime = []
+        new_anime = {}
         for k in json.keys():
             if k != 'info':
                 temp.update({k: json[k]}) 
-        for i in json['info']['Anime'].keys():
-            new_anime.append({i: get_shiki_anime(i)})
+        for i in json['info']['anime']:
+            new_anime.update(i)
         temp2.update({'anime': new_anime})
-        temp2.update({'relations': json['info']['Relations']})
-        temp2.update({'characteristics': keys_to_lower(json['info']['Сharacteristics'])})
+        temp2.update({'relations': json['info']['relations']})
+        temp2.update({'characteristics': keys_to_lower(json['info']['characteristics'])})
         temp.update({'info':temp2})
         return temp
     except:

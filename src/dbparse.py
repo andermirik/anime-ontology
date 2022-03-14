@@ -10,6 +10,8 @@ warnings.filterwarnings("ignore")
 
 BASE_URL = "https://anidb.net/ch"
 
+BASE_URL_SHIKI = 'https://shikimori.one/api'
+
 user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.2 Safari/605.1.15'
 
 session = requests.Session()
@@ -29,23 +31,25 @@ def get_proxies():
     global proxies
     global iter_proxy
     with open("src/proxy_exports5.txt", 'r', encoding='utf-8') as proxy_file:
-        string = proxy_file.readlines()
-        for sub in string:
-            s = sub.split()[0]
-            proxies.append(s)
-        iter_proxy = iter(proxies)
-        proxy_file.close()
+       string = proxy_file.readlines()
+       for sub in string:
+           s = sub.split()[0]
+           proxies.append(s)
+       iter_proxy = iter(proxies)
+       proxy_file.close()
 
 def change_proxy():
     global session
-    session = requests.Session()
-    session.headers = {
-    'User-Agent': user_agent
-    }
-    session.verify = False
-    proxy = dict(https = f'socks5://{next(iter_proxy)}')
-    print(f'Changing proxy to {proxy}')
-    session.proxies = proxy
+    # session = requests.Session()
+    # session.headers = {
+    # 'User-Agent': user_agent
+    # }
+    # session.verify = False
+    # proxy = dict(https = f'socks5://{next(iter_proxy)}')
+    # print(f'Changing proxy to {proxy}')
+    # session.proxies = proxy
+    # print('')
+    
 def get_tree_by_charcterId(id): #return html tree character's page on AniDb
     try:
         text = session.get(BASE_URL + str(id)).text
@@ -71,9 +75,9 @@ def parse_ani_db_page(id): #return main character info with anime ling on shiki 
             rel_array.get(rel_type).append({'id':key.split('/')[2], 'entity' : entity})
         json_shiki = {}
         for anime in animes:
-            json_shiki.update({anime:getShikiUrl(anime)})
-        info_json = {"Anime" : json_shiki,
-                     "Relations" : rel_array}
+            json_shiki.update({anime:get_shiki_anime(anime)})
+        info_json = {"anime" : json_shiki,
+                     "relations" : rel_array}
         character_json ={}
         for row in main_info:
             field = row.xpath('./th/text()')[0]
@@ -98,7 +102,7 @@ def parse_ani_db_page(id): #return main character info with anime ling on shiki 
             print('AniDb ban...')
             change_proxy()
             parse_ani_db_page(id)
-        info_json.update({"characteristics" : character_json})
+        info_json.update({"characteristics" : keys_to_lower(character_json)})
         return info_json
     except:
         print('Error parsing...')
@@ -114,7 +118,31 @@ def get_shiki_url(anime_name): #return first searched anime by name
         print("Error while get shiki url...")
         time.sleep(10)
         return get_shiki_url(anime_name)
-        
+
+def get_shiki_anime(animeName): #return first searched anime by name
+    search = get_shiki_response(f'/animes/search?q={animeName}')
+    if(len(search)):
+        anime = get_shiki_response(f'/animes/{search[0]["id"]}')
+        return anime
+    else:
+        return {}
+
+def get_shiki_response(path):
+    r = session_wp.get(f'{BASE_URL_SHIKI}{path}')
+
+    if r.status_code == 200:
+        time.sleep(1)
+        return json.loads(r.text)
+    else:
+        print('Error')
+        time.sleep(4)
+        return get_shiki_response(path)    
+
+def keys_to_lower(dict):
+    temp = {}
+    for k in dict.keys():
+        temp.update({k.lower():dict[k]})
+    return temp
 
 def main():
     db = get_database()
@@ -134,7 +162,7 @@ def main():
                         i.update({'info': v })
                         try:
                             db["Characters"].insert_one(i)
-                            time.sleep(1)
+                            time.sleep(2)
                         except:
                             print("")
                 else:
@@ -157,6 +185,7 @@ if __name__ == '__main__':
     # v = parseAniDbPage(98645)
     # print(v)
     get_proxies()
+    change_proxy()
     main()
 
 
