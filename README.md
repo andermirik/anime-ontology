@@ -1,7 +1,7 @@
 # anime-ontology
 Список вопросов и SPARQL-запросов
 
-1.	Какие жанры есть у аниме
+1.	Какие жанры есть у аним
 knows_query = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
