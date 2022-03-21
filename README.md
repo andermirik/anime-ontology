@@ -2,6 +2,7 @@
 Список вопросов и SPARQL-запросов
 
 1.	Какие жанры есть у аним
+```
 knows_query = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -22,8 +23,9 @@ qres = g.query(knows_query)
 for row in qres:
     #print(row)
     print(f"{row.name} knows {row.knows_name}")
-
+```
 2.	Какие персонажи участвовали в каждома аниме
+```
 knows_query = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -44,9 +46,10 @@ qres = gg.query(knows_query)
 for row in qres:
     #print(row)
     print(f"{row.name} in {row.anime_name}")
-
+```
 
 3.	Какие персонажи убили других персонажей
+```
 knows_query = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -67,8 +70,9 @@ qres = gg.query(knows_query)
 for row in qres:
     #print(row)
     print(f"{row.name} kills {row.kills_name}")
-
+```
 4.	Какие персонажи знают друг друга
+```
 knows_query = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -89,8 +93,9 @@ qres = gg.query(knows_query)
 for row in qres:
     #print(row)
     print(f"{row.name} knows {row.knows_name}")
-
+```
 5.	Какой пол у каждого персонажа
+```
 knows_query = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -110,8 +115,9 @@ qres = gg.query(knows_query)
 for row in qres:
     #print(row)
     print(f"{row.name} has {row.gender}")
-
+```
 6.	Какая сущность у каждого персонажа
+```
 knows_query = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -131,8 +137,9 @@ qres = gg.query(knows_query)
 for row in qres:
     #print(row)
     print(f"{row.name} has {row.entity}")
-
+```
 7.	Какие персонажи из аниме с жанром хентай имеют автатарку
+```
 knows_query = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -154,8 +161,9 @@ qres = gg.query(knows_query)
 for row in qres:
     #print(row)
     print(f"{row.anime} has {row.character} has {row.id}")
-
+```
 8.	У каких персонажей есть друзья 
+```
 knows_query = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -176,8 +184,9 @@ qres = gg.query(knows_query)
 for row in qres:
     #print(row)
     print(f"{row.name} friends {row.friends_name}")
-
+```
 9.	Какие персонажи аниме проявляют взаимный любовный интерес друг к другу
+```
 knows_query = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -199,8 +208,9 @@ qres = gg.query(knows_query)
 for row in qres:
     #print(row)
     print(f"{row.name} love {row.love_name}")
-
+```
 10.	Какой персонаж является врагом для других персонажей
+```
 knows_query = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -222,8 +232,9 @@ qres = gg.query(knows_query)
 for row in qres:
     #print(row)
     print(f"{row.name} is enemy {row.enemy_name}")
-
+```
 11.	Какие аниме озвучил «AniStar»
+```
 knows_query = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -243,8 +254,9 @@ qres = gg.query(knows_query)
 for row in qres:
     #print(row)
     print(f"{row.genre} has {row.anime}")
-
+```
 12.	Сколько эпизодов у каждого аниме “ ReZero ” 
+```
 knows_query = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -264,8 +276,9 @@ qres = gg.query(knows_query)
 for row in qres:
     #print(row)
     print(f"{row.episode}")	
-
+```
 13.	Какую дату выпуска имеет каждое аниме
+```
 knows_query = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -285,8 +298,9 @@ qres = gg.query(knows_query)
 for row in qres:
     #print(row)
     print(f"{row.name} {row.aired}")
-
+```
 14.	Какое оружие имеет каждый персонаж
+```
 knows_query = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -306,8 +320,9 @@ qres = gg.query(knows_query)
 for row in qres:
     #print(row)
     print(f"{row.name} {row.gun}")
-
+```
 15.	Какое описание у аниме, которые имеют тип фильм 
+```
 knows_query = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -327,9 +342,10 @@ qres = gg.query(knows_query)
 for row in qres:
     #print(row)
     print(f"{row.anime} has description: {row.description}")
-
+```
 16.	Какая продолжительность серий каждого аниме
 knows_query = """
+```
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -347,3 +363,4 @@ qres = gg.query(knows_query)
 for row in qres:
     #print(row)
     print(f"{row.anime} has description: {row.duration}")
+```
