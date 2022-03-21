@@ -1,6 +1,8 @@
 # anime-ontology
 Список вопросов и SPARQL-запросов
 
+#[Documentation](https://htmlpreview.github.io/?https://github.com/andermirik/anime-ontology/blob/main/doc/doc.html)
+
 1.	Какие жанры есть у аниме
 ```
 knows_query = """
