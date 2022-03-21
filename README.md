@@ -24,7 +24,7 @@ for row in qres:
     #print(row)
     print(f"{row.name} knows {row.knows_name}")
 ```
-2.	Какие персонажи участвовали в каждома аниме
+2.	Какие персонажи участвовали в каждом аниме
 ```
 knows_query = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
